@@ -98,6 +98,7 @@ variable "backends" {
     session_affinity                = optional(string)
     affinity_cookie_ttl_sec         = optional(number)
     locality_lb_policy              = optional(string)
+    service_lb_policy               = optional(string)
 
     health_check = optional(object({
       host                = optional(string)
@@ -291,12 +292,6 @@ variable "load_balancing_scheme" {
   description = "Load balancing scheme type (EXTERNAL for classic external load balancer, EXTERNAL_MANAGED for Envoy-based load balancer, and INTERNAL_SELF_MANAGED for traffic director)"
   type        = string
   default     = "EXTERNAL"
-}
-
-variable "service_lb_policy" {
-  description = "The resource URL for the service level LB policy to associate with the backend service"
-  type        = string
-  default     = null
 }
 
 variable "network" {

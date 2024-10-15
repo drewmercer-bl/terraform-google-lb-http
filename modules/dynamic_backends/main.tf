@@ -189,8 +189,6 @@ resource "google_compute_backend_service" "default" {
   name    = "${var.name}-backend-${each.key}"
 
   load_balancing_scheme = var.load_balancing_scheme
-  service_lb_policy = var.service_lb_policy != null ? "//www.googleapis.com/compute/v1/projects/${var.project}/global/backendServices/${lookup(each.value, "service_lb_policy")}" : null
-
 
   port_name = lookup(each.value, "port_name", "http")
   protocol  = lookup(each.value, "protocol", "HTTP")
@@ -205,6 +203,7 @@ resource "google_compute_backend_service" "default" {
   session_affinity                = lookup(each.value, "session_affinity", null)
   affinity_cookie_ttl_sec         = lookup(each.value, "affinity_cookie_ttl_sec", null)
   locality_lb_policy              = lookup(each.value, "locality_lb_policy", null)
+  service_lb_policy               = lookup(each.value, "service_lb_policy", null) 
 
   health_checks = lookup(each.value, "health_check", null) == null ? null : [google_compute_health_check.default[each.key].self_link]
 
