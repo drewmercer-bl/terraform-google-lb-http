@@ -26,8 +26,6 @@ locals {
 
   is_internal      = var.load_balancing_scheme == "INTERNAL_SELF_MANAGED"
   internal_network = local.is_internal ? var.network : null
-
-  service_lb_policy = var.service_lb_policy != null ? "//www.googleapis.com/compute/v1/projects/${var.project}/global/backendServices/${var.service_lb_policy}" : null
 }
 
 ### IPv4 block ###
@@ -191,7 +189,8 @@ resource "google_compute_backend_service" "default" {
   name    = "${var.name}-backend-${each.key}"
 
   load_balancing_scheme = var.load_balancing_scheme
-  service_lb_policy = local.service_lb_policy
+  service_lb_policy = var.service_lb_policy != null ? "//www.googleapis.com/compute/v1/projects/${var.project}/global/backendServices/${lookup(each.value, "service_lb_policy")}" : null
+
 
   port_name = lookup(each.value, "port_name", "http")
   protocol  = lookup(each.value, "protocol", "HTTP")
