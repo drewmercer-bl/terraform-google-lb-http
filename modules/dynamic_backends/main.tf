@@ -26,7 +26,6 @@ locals {
 
   is_internal      = var.load_balancing_scheme == "INTERNAL_SELF_MANAGED"
   internal_network = local.is_internal ? var.network : null
-  lifecycle_rules  = var.enable_backend_lifecycle_rules ? [backends] : []
 }
 
 ### IPv4 block ###
@@ -324,10 +323,6 @@ resource "google_compute_backend_service" "default" {
   depends_on = [
     google_compute_health_check.default
   ]
-
-  lifecycle {
-    ignore_changes = local.lifecycle_rules
-  }
 }
 
 resource "google_compute_health_check" "default" {

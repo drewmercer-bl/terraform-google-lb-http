@@ -336,9 +336,3 @@ variable "http_keep_alive_timeout_sec" {
   type        = number
   default     = null
 }
-
-variable "enable_backend_lifecycle_rules" {
-  description = "Enable backend lifecycle rules"
-  type        = bool
-  default     = false
-}
