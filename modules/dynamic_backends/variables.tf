@@ -182,8 +182,6 @@ variable "backends" {
       success_rate_request_volume = optional(number)
       success_rate_stdev_factor   = optional(number)
     }))
-
-    ignore_backend_changes = optional(bool)
   }))
 }
 
@@ -337,4 +335,10 @@ variable "http_keep_alive_timeout_sec" {
   description = "Specifies how long to keep a connection open, after completing a response, while there is no matching traffic (in seconds)."
   type        = number
   default     = null
+}
+
+variable "enable_backend_lifecycle_rules" {
+  description = "Enable backend lifecycle rules"
+  type        = bool
+  default     = false
 }
