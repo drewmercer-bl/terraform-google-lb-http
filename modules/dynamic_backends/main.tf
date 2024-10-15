@@ -326,7 +326,7 @@ resource "google_compute_backend_service" "default" {
   ]
 
   lifecycle {
-    local.lifecycle_rules
+    ignore_changes = local.lifecycle_rules
   }
 }
 
