@@ -26,6 +26,8 @@ locals {
 
   is_internal      = var.load_balancing_scheme == "INTERNAL_SELF_MANAGED"
   internal_network = local.is_internal ? var.network : null
+
+  local.service_lb_policy = var.service_lb_policy != null ? "//www.googleapis.com/compute/v1/projects/${var.project}/global/backendServices/${var.service_lb_policy}" : null
 }
 
 ### IPv4 block ###
