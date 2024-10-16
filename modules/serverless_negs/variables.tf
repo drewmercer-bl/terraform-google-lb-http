@@ -76,6 +76,7 @@ variable "backends" {
   type = map(object({
     project                 = optional(string)
     protocol                = optional(string)
+    name                    = optional(string)
     port_name               = optional(string)
     description             = optional(string)
     enable_cdn              = optional(bool)
