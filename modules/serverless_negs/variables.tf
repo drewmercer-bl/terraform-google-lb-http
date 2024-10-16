@@ -24,6 +24,11 @@ variable "name" {
   type        = string
 }
 
+variable "service_name" {
+  description = "Name of the service"
+  type        = string
+}
+
 variable "create_address" {
   type        = bool
   description = "Create a new global IPv4 address"
